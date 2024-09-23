@@ -3,7 +3,8 @@
   "version": "0.6.0",
   "description": "Adds an attribute to each rich text field in the GraphQL schema to render HTML to Markdown on the server.",
   "strapi": {
-    "name": "Render Markdown server side (GraphQL)",
+    "name": "strapi-graphql-render-markdown-serverside",
+    "displayName": "Render Markdown server side (GraphQL)",
     "description": "Adds an attribute to each rich text field in the GraphQL schema to render HTML to Markdown on the server.",
     "kind": "plugin"
   },
