@@ -1,0 +1,69 @@
+{
+  "name": "strapi-graphql-render-markdown-serverside",
+  "version": "0.5.0",
+  "description": "Adds an attribute to each rich text field in the GraphQL schema to render HTML to Markdown on the server.",
+  "strapi": {
+    "name": "Render Markdown server side (GraphQL)",
+    "description": "Adds an attribute to each rich text field in the GraphQL schema to render HTML to Markdown on the server.",
+    "kind": "plugin"
+  },
+  "dependencies": {
+    "tslib": "^2.7.0"
+  },
+  "devDependencies": {
+    "@strapi/typescript-utils": "^4.6.0",
+    "@types/markdown-it": "^13.0.7",
+    "@types/markdown-it-container": "^2.0.9",
+    "@types/markdown-it-emoji": "^2.0.4",
+    "@types/markdown-it-footnote": "^3.0.3",
+    "@types/sanitize-html": "2.11.0",
+    "typescript": "5.2.2"
+  },
+  "peerDependencies": {
+    "@strapi/types": "^4.25.11",
+    "apollo-server-core": "^3.12.1",
+    "apollo-server-plugin-base": "^3.7.2",
+    "graphql": "^15.9.0",
+    "highlight.js": "^10.4.1",
+    "markdown-it": "^12.3.2",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-deflist": "^2.1.0",
+    "markdown-it-emoji": "^2.0.0",
+    "markdown-it-footnote": "^3.0.3",
+    "markdown-it-ins": "^3.0.1",
+    "markdown-it-mark": "^3.0.1",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "1.0.0",
+    "sanitize-html": "2.13.0"
+  },
+  "author": {
+    "name": "Jorrit Schippers"
+  },
+  "maintainers": [
+    {
+      "name": "Jorrit Schippers"
+    }
+  ],
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "develop": "tsc -w",
+    "build": "tsc",
+    "prepublishOnly": "tsc"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/**/*.js",
+    "strapi-server.js"
+  ],
+  "exports": {
+    "./strapi-server": {
+      "source": "./strapi-server.js",
+      "require": "./strapi-server.js",
+      "default": "./strapi-server.js"
+    }
+  }
+}
