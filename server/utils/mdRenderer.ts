@@ -21,7 +21,7 @@ import sup from 'markdown-it-sup';
 import { Options } from 'markdown-it/lib';
 
 export const buildMarkdown = (options: Options): Markdown => {
-  const md: Markdown = new Markdown(defaults(options, {
+  const md: Markdown = new Markdown(defaults(options ?? {}, {
     html: true, // Enable HTML tags in source
     xhtmlOut: false,
     breaks: true,

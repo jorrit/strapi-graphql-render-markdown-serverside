@@ -1,14 +1,22 @@
 import type { Schema, Strapi } from '@strapi/types';
+import { defaultsDeep } from 'lodash';
 import type { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import type { Common } from '@strapi/types/dist/types';
+import type { GraphQLFieldResolver } from 'graphql/type/definition';
+import type { PluginConfig } from './index';
 import { assertInputType, GraphQLArgument, isObjectType } from 'graphql';
 import { buildMarkdown } from './utils/mdRenderer';
-import { GraphQLFieldResolver } from 'graphql/type/definition';
-import { PluginConfig } from './index';
 import sanitize from 'sanitize-html';
 
 const resolveToHtml = (pluginConfig: PluginConfig): GraphQLFieldResolver<object, unknown, { html?: boolean }> => {
   const md = buildMarkdown(pluginConfig.markdown);
+  const sanitizeConfig = defaultsDeep(pluginConfig.sanitize ?? {}, {
+    allowedAttributes: {
+      '*': ['href', 'align', 'alt', 'center', 'width', 'height', 'type', 'controls', 'target'],
+      img: ['src', 'alt'],
+      source: ['src', 'type'],
+    },
+  }, sanitize.defaults);
 
   return (root, opts, graphqlContext, info) => {
     const data = root[info.fieldName];
@@ -16,7 +24,7 @@ const resolveToHtml = (pluginConfig: PluginConfig): GraphQLFieldResolver<object,
       return data;
     }
 
-    return sanitize(md.render(data || ''), pluginConfig.sanitize);
+    return sanitize(md.render(data || ''), sanitizeConfig);
   };
 };
 

@@ -65,5 +65,9 @@
       "require": "./strapi-server.js",
       "default": "./strapi-server.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorrit/strapi-graphql-render-markdown-serverside.git"
   }
 }
