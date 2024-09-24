@@ -65,7 +65,8 @@
       "source": "./strapi-server.js",
       "require": "./strapi-server.js",
       "default": "./strapi-server.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
