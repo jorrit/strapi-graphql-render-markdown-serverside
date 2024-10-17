@@ -1,12 +1,12 @@
-import type { Schema, Strapi } from '@strapi/types';
+import { Core, Schema } from '@strapi/types';
 import { defaultsDeep } from 'lodash';
-import type { ApolloServerPlugin } from 'apollo-server-plugin-base';
-import type { Common } from '@strapi/types/dist/types';
+import type { ApolloServerPlugin } from '@apollo/server';
 import type { GraphQLFieldResolver } from 'graphql/type/definition';
 import type { PluginConfig } from './index';
 import { assertInputType, GraphQLArgument, isObjectType } from 'graphql';
 import { buildMarkdown } from './utils/mdRenderer';
 import sanitize from 'sanitize-html';
+import { Strapi } from '@strapi/types/dist/core';
 
 const resolveToHtml = (pluginConfig: PluginConfig): GraphQLFieldResolver<object, unknown, { html?: boolean }> => {
   const md = buildMarkdown(pluginConfig.markdown);
@@ -32,7 +32,7 @@ const getRichTextFields = (strapi: Strapi) => {
   const contentTypes: Schema.ContentType[] = Object.values(strapi.contentTypes).filter(model => model.internal !== true);
 
   const pluginContentTypes = Object.values(strapi.plugins)
-    .map((plugin: Common.Plugin) => Object.values(plugin.contentTypes) || [])
+    .map((plugin: Core.Plugin) => Object.values(plugin.contentTypes) || [])
     .reduce((acc, arr) => acc.concat(arr), []);
 
   const components = Object.values(strapi.components);
@@ -79,7 +79,7 @@ const RenderMarkdownPlugin = (strapi: Strapi, pluginConfig: PluginConfig): Apoll
           return;
         }
 
-        field.args.push(htmlArgument);
+        field.args = [...field.args, htmlArgument];
         field.resolve = fieldResolver;
       });
     }

@@ -1,5 +1,5 @@
 import type { Plugin } from '@strapi/types';
-import type { Config } from 'apollo-server-core';
+import type { ApolloServerOptions } from '@apollo/server';
 import { RenderMarkdownPlugin } from './htmlplugin';
 import sanitize, { type IOptions as SanitizeHtmlOptions } from 'sanitize-html';
 import type { Options as MarkdownItOptions } from 'markdown-it/lib';
@@ -30,7 +30,7 @@ const plugin: Partial<Plugin.LoadedPlugin> = {
   register: ({ strapi }) => {
     const pluginConfig: PluginConfig = strapi.config.get('plugin.strapi-graphql-render-markdown-serverside');
     const graphQlPlugin = strapi.plugin('graphql');
-    const apolloServerConfig: Config = graphQlPlugin.config('apolloServer');
+    const apolloServerConfig: ApolloServerOptions<unknown> = graphQlPlugin.config('apolloServer');
 
     if (!apolloServerConfig.plugins) {
       apolloServerConfig.plugins = [];
