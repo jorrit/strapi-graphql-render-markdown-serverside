@@ -68,6 +68,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jorrit/strapi-graphql-render-markdown-serverside.git"
+    "url": "git+https://github.com/jorrit/strapi-graphql-render-markdown-serverside.git"
   }
 }
