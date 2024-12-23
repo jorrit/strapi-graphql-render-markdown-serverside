@@ -28,7 +28,7 @@ const plugin: Partial<Plugin.LoadedPlugin> = {
     validator: (config: PluginConfig) => void(0),
   },
   register: ({ strapi }) => {
-    const pluginConfig: PluginConfig = strapi.config.get('plugin.strapi-graphql-render-markdown-serverside');
+    const pluginConfig: PluginConfig = strapi.config.get('plugin::strapi-graphql-render-markdown-serverside');
     const graphQlPlugin = strapi.plugin('graphql');
     const apolloServerConfig: ApolloServerOptions<unknown> = graphQlPlugin.config('apolloServer');
 
