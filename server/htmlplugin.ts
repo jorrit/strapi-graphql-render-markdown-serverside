@@ -9,7 +9,7 @@ import sanitize from 'sanitize-html';
 import { Strapi } from '@strapi/types/dist/core';
 
 const resolveToHtml = (pluginConfig: PluginConfig): GraphQLFieldResolver<object, unknown, { html?: boolean }> => {
-  const md = buildMarkdown(pluginConfig.markdown);
+  const md = buildMarkdown(pluginConfig.markdown, pluginConfig.linkify);
   const sanitizeConfig = defaultsDeep(pluginConfig.sanitize ?? {}, {
     allowedAttributes: {
       '*': ['href', 'align', 'alt', 'center', 'width', 'height', 'type', 'controls', 'target'],

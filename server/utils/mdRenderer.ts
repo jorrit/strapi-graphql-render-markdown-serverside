@@ -18,9 +18,10 @@ import mark from 'markdown-it-mark';
 import sub from 'markdown-it-sub';
 // @ts- expect-error - library does not export types
 import sup from 'markdown-it-sup';
-import { Options } from 'markdown-it/lib';
+import type { Options as MarkdownItOptions } from 'markdown-it/lib';
+import type { Options as LinkifyOptions } from 'linkify-it';
 
-export const buildMarkdown = (options: Options): Markdown => {
+export const buildMarkdown = (options: MarkdownItOptions, linkifyOptions: LinkifyOptions | undefined): Markdown => {
   const md: Markdown = new Markdown(defaults(options ?? {}, {
     html: true, // Enable HTML tags in source
     xhtmlOut: false,
@@ -77,6 +78,10 @@ export const buildMarkdown = (options: Options): Markdown => {
     /* ↩ with escape code to prevent display as Apple Emoji on iOS */
     return ' <span class="footnote-backref">\u21a9\uFE0E</span>';
   };
+
+  if (linkifyOptions) {
+    md.linkify.set(linkifyOptions);
+  }
 
   return md;
 };

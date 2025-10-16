@@ -30,6 +30,9 @@ Add the following to your `config/plugins.js` or `config/plugins.ts` file:
       },
       markdown: {
         // Additional markdown-it config
+      },
+      linkify: {
+        // Additional linkify-it config, optional
       }
     }
   },

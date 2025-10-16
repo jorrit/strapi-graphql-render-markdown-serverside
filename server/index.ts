@@ -3,10 +3,12 @@ import type { ApolloServerOptions } from '@apollo/server';
 import { RenderMarkdownPlugin } from './htmlplugin';
 import sanitize, { type IOptions as SanitizeHtmlOptions } from 'sanitize-html';
 import type { Options as MarkdownItOptions } from 'markdown-it/lib';
+import type { Options as LinkifyOptions } from 'linkify-it';
 
 export interface PluginConfig {
   sanitize?: SanitizeHtmlOptions;
   markdown?: MarkdownItOptions;
+  linkify?: LinkifyOptions | undefined;
 }
 
 const plugin: Partial<Plugin.LoadedPlugin> = {
@@ -21,11 +23,9 @@ const plugin: Partial<Plugin.LoadedPlugin> = {
           source: ['src', 'type'],
         },
       },
-      markdown: {
-
-      }
+      markdown: {}
     },
-    validator: (config: PluginConfig) => void(0),
+    validator: (config: PluginConfig) => void (0),
   },
   register: ({ strapi }) => {
     const pluginConfig: PluginConfig = strapi.config.get('plugin::strapi-graphql-render-markdown-serverside');
